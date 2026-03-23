@@ -1,0 +1,125 @@
+nohup: ignoring input
+CREATE TABLE IF NOT EXISTS Users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL -- 'ADMIN' or 'OFFICER'
+  );
+CREATE TABLE IF NOT EXISTS FIRs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    incident_date TEXT NOT NULL,
+    location TEXT NOT NULL,
+    complainant_name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    status TEXT DEFAULT 'Open', -- 'Open', 'Under Investigation', 'Closed'
+    officer_id INTEGER,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (officer_id) REFERENCES Users(id)
+  );
+CREATE TABLE IF NOT EXISTS Cases (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fir_id INTEGER NOT NULL,
+    status TEXT DEFAULT 'Under Investigation',
+    assigned_officer_id INTEGER,
+    notes TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (fir_id) REFERENCES FIRs(id),
+    FOREIGN KEY (assigned_officer_id) REFERENCES Users(id)
+  );
+CREATE TABLE IF NOT EXISTS Criminals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    dob TEXT,
+    identifying_marks TEXT,
+    history TEXT,
+    photo_url TEXT
+  );
+CREATE TABLE IF NOT EXISTS Criminal_Cases (
+    criminal_id INTEGER,
+    case_id INTEGER,
+    PRIMARY KEY (criminal_id, case_id),
+    FOREIGN KEY (criminal_id) REFERENCES Criminals(id),
+    FOREIGN KEY (case_id) REFERENCES Cases(id)
+  );
+CREATE TABLE IF NOT EXISTS News (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    status TEXT DEFAULT 'Pending Review', -- 'Pending Review', 'Approved'
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+Server running on port 5000
+SELECT COUNT(*) as count FROM FIRs
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Under Investigation'
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Closed'
+SELECT COUNT(*) as count FROM News WHERE status = 'Pending Review'
+SELECT date(created_at) as date, COUNT(*) as count FROM FIRs GROUP BY date(created_at) ORDER BY date DESC LIMIT 7
+SELECT COUNT(*) as count FROM FIRs
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Under Investigation'
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Closed'
+SELECT COUNT(*) as count FROM News WHERE status = 'Pending Review'
+SELECT date(created_at) as date, COUNT(*) as count FROM FIRs GROUP BY date(created_at) ORDER BY date DESC LIMIT 7
+SELECT * FROM FIRs ORDER BY created_at DESC
+SELECT * FROM FIRs ORDER BY created_at DESC
+SELECT Cases.*, FIRs.description as fir_desc FROM Cases JOIN FIRs ON Cases.fir_id = FIRs.id
+SELECT Cases.*, FIRs.description as fir_desc FROM Cases JOIN FIRs ON Cases.fir_id = FIRs.id
+SELECT * FROM Criminals
+SELECT * FROM Criminals
+SELECT * FROM Users WHERE role = 'OFFICER'
+SELECT * FROM Users WHERE role = 'OFFICER'
+SELECT * FROM News ORDER BY created_at DESC
+SELECT * FROM News ORDER BY created_at DESC
+SELECT COUNT(*) as count FROM FIRs
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Under Investigation'
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Closed'
+SELECT COUNT(*) as count FROM News WHERE status = 'Pending Review'
+SELECT date(created_at) as date, COUNT(*) as count FROM FIRs GROUP BY date(created_at) ORDER BY date DESC LIMIT 7
+SELECT COUNT(*) as count FROM FIRs
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Under Investigation'
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Closed'
+SELECT COUNT(*) as count FROM News WHERE status = 'Pending Review'
+SELECT date(created_at) as date, COUNT(*) as count FROM FIRs GROUP BY date(created_at) ORDER BY date DESC LIMIT 7
+SELECT * FROM FIRs ORDER BY created_at DESC
+SELECT * FROM FIRs ORDER BY created_at DESC
+SELECT Cases.*, FIRs.description as fir_desc FROM Cases JOIN FIRs ON Cases.fir_id = FIRs.id
+SELECT Cases.*, FIRs.description as fir_desc FROM Cases JOIN FIRs ON Cases.fir_id = FIRs.id
+SELECT * FROM FIRs ORDER BY created_at DESC
+SELECT * FROM FIRs ORDER BY created_at DESC
+SELECT COUNT(*) as count FROM FIRs
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Under Investigation'
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Closed'
+SELECT COUNT(*) as count FROM News WHERE status = 'Pending Review'
+SELECT date(created_at) as date, COUNT(*) as count FROM FIRs GROUP BY date(created_at) ORDER BY date DESC LIMIT 7
+SELECT COUNT(*) as count FROM FIRs
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Under Investigation'
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Closed'
+SELECT COUNT(*) as count FROM News WHERE status = 'Pending Review'
+SELECT date(created_at) as date, COUNT(*) as count FROM FIRs GROUP BY date(created_at) ORDER BY date DESC LIMIT 7
+SELECT * FROM FIRs ORDER BY created_at DESC
+SELECT * FROM FIRs ORDER BY created_at DESC
+SELECT Cases.*, FIRs.description as fir_desc FROM Cases JOIN FIRs ON Cases.fir_id = FIRs.id
+SELECT Cases.*, FIRs.description as fir_desc FROM Cases JOIN FIRs ON Cases.fir_id = FIRs.id
+SELECT * FROM Criminals
+SELECT * FROM Criminals
+SELECT * FROM Users WHERE role = 'OFFICER'
+SELECT * FROM Users WHERE role = 'OFFICER'
+SELECT * FROM News ORDER BY created_at DESC
+SELECT * FROM News ORDER BY created_at DESC
+SELECT * FROM Users WHERE role = 'OFFICER'
+SELECT * FROM Users WHERE role = 'OFFICER'
+SELECT * FROM Criminals
+SELECT * FROM Criminals
+SELECT Cases.*, FIRs.description as fir_desc FROM Cases JOIN FIRs ON Cases.fir_id = FIRs.id
+SELECT Cases.*, FIRs.description as fir_desc FROM Cases JOIN FIRs ON Cases.fir_id = FIRs.id
+SELECT * FROM FIRs ORDER BY created_at DESC
+SELECT * FROM FIRs ORDER BY created_at DESC
+SELECT COUNT(*) as count FROM FIRs
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Under Investigation'
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Closed'
+SELECT COUNT(*) as count FROM News WHERE status = 'Pending Review'
+SELECT date(created_at) as date, COUNT(*) as count FROM FIRs GROUP BY date(created_at) ORDER BY date DESC LIMIT 7
+SELECT COUNT(*) as count FROM FIRs
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Under Investigation'
+SELECT COUNT(*) as count FROM Cases WHERE status = 'Closed'
+SELECT COUNT(*) as count FROM News WHERE status = 'Pending Review'
+SELECT date(created_at) as date, COUNT(*) as count FROM FIRs GROUP BY date(created_at) ORDER BY date DESC LIMIT 7
